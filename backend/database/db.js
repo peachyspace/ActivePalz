@@ -1,4 +1,4 @@
-const Sequelize = require("sequelize");
+const { Sequelize } = require("sequelize");
 const pkg = require("../../package.json");
 
 const databaseName =
@@ -18,4 +18,18 @@ Connection URI will be used to connect and authenticate to a PostgreSQL database
 - username and password are optional
 */
 
-module.exports = db;
+/*
+Testing the connection:
+- You can use the .authenticate() function to test if the  connection is OK:
+
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Connection has been established successfully.");
+  })
+  .catch((error) => {
+    console.error("Unable to connect to the database: ", error);
+  });
+*/
+
+module.exports = sequelize;

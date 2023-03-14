@@ -1,12 +1,21 @@
+const Workout = require("../database/models/workout");
 //desc:   set workout
 //route:  POST /api/workouts
 //access: private
-const setWorkout = async (req, res) => {
-  if (!req.body.text) {
-    res.status(400);
-    throw new Error("Please add a name");
+// const setWorkout = async (req, res) => {
+//   if (!req.body.text) {
+//     res.status(400);
+//     throw new Error("Please add a name");
+//   }
+//   res.status(200).json({ message: "Set workout !!" });
+// };
+const setWorkout = async (req, res, next) => {
+  try {
+    const newWorkout = await Workout.create(req.body);
+    res.json(newWorkout);
+  } catch (error) {
+    next(error);
   }
-  res.status(200).json({ message: "Set workout !!" });
 };
 
 //desc:    Get workouts
