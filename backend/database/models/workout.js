@@ -20,9 +20,10 @@ const Workout = sequelize.define("workouts", {
 sequelize
   .sync()
   .then(() => {
-    console.log("Workout table created successfully!");
+    console.log("Workout table created successfully!!!");
   })
   .catch((error) => {
     console.error("Unable to create table : ", error);
   });
+
 module.exports = Workout;

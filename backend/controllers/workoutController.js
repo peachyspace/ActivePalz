@@ -9,7 +9,7 @@ const Workout = require("../database/models/workout");
 //   }
 //   res.status(200).json({ message: "Set workout !!" });
 // };
-const setWorkout = async (req, res, next) => {
+const setWorkout = async (req, res) => {
   try {
     const newWorkout = await Workout.create(req.body);
     res.json(newWorkout);
