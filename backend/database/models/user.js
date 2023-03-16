@@ -21,7 +21,7 @@ const User = sequelize.define("users", {
   sex: {
     type: DataTypes.STRING,
   },
-  overall_workouts_completed: {
+  total_workouts_completed: {
     type: DataTypes.INTEGER,
   },
   workouts_completed_this_week: {
@@ -29,8 +29,15 @@ const User = sequelize.define("users", {
   },
 });
 
-sequelize
-  .sync()
+// sequelize
+//   .sync()
+//   .then(() => {
+//     console.log("user table created succesfully");
+//   })
+//   .catch((error) => {
+//     console.error("Unable to create table", error);
+//   });
+User.sync()
   .then(() => {
     console.log("user table created succesfully");
   })

@@ -17,10 +17,18 @@ const Workout = sequelize.define("workouts", {
     type: DataTypes.DATEONLY,
   },
 });
+// sequelize
+//   .sync()
+//   .then(() => {
+//     console.log("Workout table created successfully!!!");
+//   })
+//   .catch((error) => {
+//     console.error("Unable to create table : ", error);
+//   });
 sequelize
   .sync()
   .then(() => {
-    console.log("Workout table created successfully!!!");
+    console.log("Workout table created successfully!");
   })
   .catch((error) => {
     console.error("Unable to create table : ", error);

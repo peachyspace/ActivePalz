@@ -1,4 +1,5 @@
-const Workout = require("../database/models/workout");
+const { Workout } = require("../database/models");
+// const Workout = require("../database/models/workout");
 //desc:   set workout
 //route:  POST /api/workouts
 //access: private
@@ -9,7 +10,7 @@ const Workout = require("../database/models/workout");
 //   }
 //   res.status(200).json({ message: "Set workout !!" });
 // };
-const setWorkout = async (req, res) => {
+const setWorkout = async (req, res, next) => {
   try {
     const newWorkout = await Workout.create(req.body);
     res.json(newWorkout);
