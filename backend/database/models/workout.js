@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../db"); //access to sequelize instance exported from db.js
+const db = require("../db"); //access to db instance exported from db.js
 
-const Workout = sequelize.define("workouts", {
+const Workout = db.define("workouts", {
   userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -17,21 +17,5 @@ const Workout = sequelize.define("workouts", {
     type: DataTypes.DATEONLY,
   },
 });
-// sequelize
-//   .sync()
-//   .then(() => {
-//     console.log("Workout table created successfully!!!");
-//   })
-//   .catch((error) => {
-//     console.error("Unable to create table : ", error);
-//   });
-sequelize
-  .sync()
-  .then(() => {
-    console.log("Workout table created successfully!");
-  })
-  .catch((error) => {
-    console.error("Unable to create table : ", error);
-  });
 
 module.exports = Workout;

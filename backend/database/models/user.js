@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../db");
+const db = require("../db");
 
-const User = sequelize.define("users", {
+const User = db.define("users", {
   first_name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -28,21 +28,5 @@ const User = sequelize.define("users", {
     type: DataTypes.INTEGER,
   },
 });
-
-// sequelize
-//   .sync()
-//   .then(() => {
-//     console.log("user table created succesfully");
-//   })
-//   .catch((error) => {
-//     console.error("Unable to create table", error);
-//   });
-User.sync()
-  .then(() => {
-    console.log("user table created succesfully");
-  })
-  .catch((error) => {
-    console.error("Unable to create table", error);
-  });
 
 module.exports = User;

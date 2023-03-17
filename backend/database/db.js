@@ -5,7 +5,7 @@ const databaseName =
   pkg.name + (process.env.NODE_ENV === "test" ? "-test" : "");
 
 //Sequelize instance
-const sequelize = new Sequelize(
+const db = new Sequelize(
   process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`,
   {
     logging: false,
@@ -32,4 +32,4 @@ sequelize
   });
 */
 
-module.exports = sequelize;
+module.exports = db;

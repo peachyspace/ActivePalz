@@ -1,10 +1,49 @@
 //'use strict'
 
-const sequelize = require("../backend/database/db");
+const db = require("../backend/database");
 const { User, Workout } = require("../backend/database/models");
 async function seed() {
-  await sequelize.sync({ force: true });
+  await db.sync({ force: true });
   console.log("sequelize synced ");
+  const users = await Promise.all([
+    User.create({
+      first_name: "Maria",
+      last_name: "Campos",
+      email: "campos@email.com",
+      password: "1234",
+      sex: "female",
+    }),
+    User.create({
+      first_name: "Lucas",
+      last_name: "Perez",
+      email: "perez@email.com",
+      password: "1234",
+      sex: "male",
+    }),
+    User.create({
+      first_name: "Thea",
+      last_name: "Smith",
+      email: "smith@email.com",
+      password: "1234",
+      sex: "female",
+    }),
+    User.create({
+      first_name: "Adam",
+      last_name: "Lopez",
+      email: "lopez@email.com",
+      password: "1234",
+      sex: "male",
+    }),
+    User.create({
+      first_name: "Jess",
+      last_name: "Lee",
+      email: "lee@email.com",
+      password: "1234",
+      sex: "female",
+    }),
+  ]);
+  console.log(`seeded ${users.length} users`);
+  console.log("seeded successfully");
 }
 async function runSeed() {
   console.log("seeding...");
@@ -15,7 +54,7 @@ async function runSeed() {
     process.exitCode = 1;
   } finally {
     console.log("closing db connection");
-    await sequelize.close();
+    await db.close();
     console.log("db connection closed");
   }
 }
