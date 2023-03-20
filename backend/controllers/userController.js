@@ -4,9 +4,6 @@ const { User } = require("../database/models");
 //desc: Create User
 //route: POST /api/users
 //access: private
-// const setUser = (req, res) => {
-//   res.status(200).json({ message: "creating user" });
-// };
 const setUser = async (req, res, next) => {
   try {
     const newUser = await User.create(req.body);

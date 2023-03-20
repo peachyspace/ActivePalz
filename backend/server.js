@@ -10,6 +10,7 @@ const createApp = () => {
   app.use(express.urlencoded({ extended: "false" }));
   app.use("/api/workouts", require("./routes/workoutRoutes"));
   app.use("/api/users", require("./routes/userRoutes")); //mount a router on a path
+  app.use("/auth", require("./auth"));
   app.use(errorHandler); //overwrites the defult express error handler
 };
 
@@ -27,9 +28,9 @@ async function bootApp() {
 }
 
 if (require.main === module) {
-  bootApp();
+  bootApp(); //this module was run directly from the command line as in node xxx.js
 } else {
-  createApp();
+  createApp(); // this module was not run directly from the command line and probably loaded by something else
 }
 
 // const express = require("express");

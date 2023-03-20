@@ -3,6 +3,8 @@
 const db = require("../backend/database");
 const { User, Workout } = require("../backend/database/models");
 async function seed() {
+  // Create database tables based on the models we've defined
+  // Drops existing tables if there are any
   await db.sync({ force: true });
   console.log("sequelize synced ");
   const users = await Promise.all([
@@ -58,6 +60,7 @@ async function runSeed() {
     console.log("db connection closed");
   }
 }
+//We opened a connection to our database and then closed it.
 
 if (require.main === module) {
   runSeed();
