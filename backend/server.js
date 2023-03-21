@@ -8,8 +8,7 @@ const db = require("./database");
 const createApp = () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: "false" }));
-  app.use("/api/workouts", require("./routes/workoutRoutes"));
-  app.use("/api/users", require("./routes/userRoutes")); //mount a router on a path
+  app.use("/api", require("./routes")); //mount a router on a path
   app.use("/auth", require("./auth"));
   app.use(errorHandler); //overwrites the defult express error handler
 };
@@ -18,7 +17,7 @@ const startListening = () => {
   app.listen(port, () => console.log(`Sever started on port ${port}`));
 };
 const syncDb = () => {
-  db.sync();
+  db.sync(); //automatically synchronize all models
 };
 
 async function bootApp() {

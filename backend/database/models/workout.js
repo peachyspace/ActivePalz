@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const db = require("../db"); //access to db instance exported from db.js
+const db = require("../db"); //access to datbase instance exported from db.js
 
 const Workout = db.define("workouts", {
   userId: {

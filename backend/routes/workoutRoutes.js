@@ -6,7 +6,7 @@ const {
   updateWorkout,
   deleteWorkout,
 } = require("../controllers/workoutController");
-router.post("/", setWorkout);
+router.post("/create", setWorkout);
 router.get("/", getWorkouts);
 router.put("/:id", updateWorkout);
 router.delete("/:id", deleteWorkout);
