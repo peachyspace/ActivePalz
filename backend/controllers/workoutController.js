@@ -18,12 +18,24 @@ const setWorkout = async (req, res, next) => {
     next(error);
   }
 };
-
+//desc:    Get workouts
+//route:   GET /api/workouts/:userId
+//access:  private
+const getWorkouts = async (req, res) => {
+  res.status(200).json({ message: `Get ALL workouts ${req.params.userId}` });
+};
 //desc:    Get workouts
 //route:   GET /api/workouts
 //access:  private
-const getWorkouts = async (req, res) => {
-  res.status(200).json({ message: "Get workouts!!! : ) " });
+const getWorkout = async (req, res, next) => {
+  try {
+    const workout = await Workout.findByPk(req.params.workoutId);
+    const exercises = await workout.getExercises();
+    console.log(exercises);
+    res.json(workout);
+  } catch (error) {
+    next(error);
+  }
 };
 
 //desc:    Update workouts
@@ -42,6 +54,7 @@ const deleteWorkout = async (req, res) => {
 
 module.exports = {
   setWorkout,
+  getWorkout,
   getWorkouts,
   updateWorkout,
   deleteWorkout,

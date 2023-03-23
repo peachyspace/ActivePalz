@@ -5,6 +5,7 @@ const { Exercise } = require("../database/models");
 //access: private
 const setExercise = async (req, res, next) => {
   try {
+    console.log(req.workout_id, req.name);
     const newExercise = await Exercise.create(req.body);
     res.json(newExercise);
   } catch (error) {
