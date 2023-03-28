@@ -6,8 +6,7 @@ const { Exercise, Workout } = require("../database/models");
 const setExercise = async (req, res, next) => {
   try {
     const newExercise = await Exercise.create(req.body);
-    // const workout = await Workout.findByPk(req.body.workout_id);
-    // workout.addExercise(newExercise.id);
+    await newExercise.setWorkout(req.body.workout_id);
     res.json(newExercise);
   } catch (error) {
     next(error);
