@@ -1,4 +1,4 @@
-const { Exercise } = require("../database/models");
+const { Exercise, Workout } = require("../database/models");
 
 //desc: Create exercise
 //route: POST /api/exercise/create
@@ -6,8 +6,8 @@ const { Exercise } = require("../database/models");
 const setExercise = async (req, res, next) => {
   try {
     const newExercise = await Exercise.create(req.body);
-    console.log(req.body.workout_id, req.body.name);
-
+    // const workout = await Workout.findByPk(req.body.workout_id);
+    // workout.addExercise(newExercise.id);
     res.json(newExercise);
   } catch (error) {
     next(error);
@@ -20,6 +20,7 @@ const setExercise = async (req, res, next) => {
 const getExercise = async (req, res, next) => {
   try {
     const exercise = await Exercise.findByPk(req.params.id);
+
     res.json(exercise);
   } catch (error) {
     next(error);
@@ -40,4 +41,21 @@ const getExercisesOfAWorkout = async (req, res, next) => {
   }
 };
 
-module.exports = { setExercise, getExercise, getExercisesOfAWorkout };
+//desc: update am exercise
+//route: GET /api/exercise/:id
+//access: private
+const updateExercise = async (req, res, next) => {
+  try {
+    const exercise = await Exercise.findByPk(req.params.id);
+    await exercise.update(req.body);
+    res.json(exercise);
+  } catch (error) {
+    next(error);
+  }
+};
+module.exports = {
+  setExercise,
+  getExercise,
+  getExercisesOfAWorkout,
+  updateExercise,
+};

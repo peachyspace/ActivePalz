@@ -1,15 +1,8 @@
 const { Workout, Exercise } = require("../database/models");
-// const Workout = require("../database/models/workout");
+
 //desc:   set workout
 //route:  POST /api/workouts
 //access: private
-// const setWorkout = async (req, res) => {
-//   if (!req.body.text) {
-//     res.status(400);
-//     throw new Error("Please add a name");
-//   }
-//   res.status(200).json({ message: "Set workout !!" });
-// };
 const setWorkout = async (req, res, next) => {
   try {
     const newWorkout = await Workout.create(req.body);
@@ -21,18 +14,15 @@ const setWorkout = async (req, res, next) => {
 //desc:    Get workouts
 //route:   GET /api/workouts/all/:userId
 //access:  private
-const getWorkouts = async (req, res) => {
-  res.status(200).json({ message: `Get ALL workouts ${req.params.userId}` });
-};
+const getWorkouts = async (req, res) => {};
 //desc:    Get workouts
-//route:   GET /api/workouts
+//route:   GET /api/workouts/exercises/:workoutId
 //access:  private
 const getWorkout = async (req, res, next) => {
   try {
-    const workout = await Workout.findByPk(req.params.workoutId);
-    //const isEmpty = await workout.hasExercise();
-
-    res.json(workout);
+    const workout = Workout.findByPk(req.params.workoutId);
+    const relatedExercises = workout.getExercises();
+    res.json(relatedExercises);
   } catch (error) {
     next(error);
   }
@@ -41,16 +31,16 @@ const getWorkout = async (req, res, next) => {
 //desc: get all the exercises that are part of a workout
 //route: GET /api/workout/exercises/:workoutId
 //access: private
-// const getExercisesOfAWorkout = async (req, res, next) => {
-//   try {
-//     const exercisesOfWorkout = await Exercise.findAll({
-//       where: { workout_id: req.params.workoutId },
-//     });
-//     res.json(exercisesOfWorkout);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+const getExercisesOfAWorkout = async (req, res, next) => {
+  try {
+    const exercisesOfWorkout = await Exercise.findAll({
+      where: { workout_id: req.params.workoutId },
+    });
+    res.json(exercisesOfWorkout);
+  } catch (error) {
+    next(error);
+  }
+};
 
 //desc:    Update workouts
 //route:   PUT /api/workouts/:id
@@ -69,7 +59,7 @@ const deleteWorkout = async (req, res) => {
 module.exports = {
   setWorkout,
   getWorkout,
-  // getExercisesOfAWorkout,
+  getExercisesOfAWorkout,
   getWorkouts,
   updateWorkout,
   deleteWorkout,
