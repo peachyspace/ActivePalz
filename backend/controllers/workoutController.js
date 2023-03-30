@@ -11,18 +11,28 @@ const setWorkout = async (req, res, next) => {
     next(error);
   }
 };
-//desc:    Get workouts
-//route:   GET /api/workouts/all/:userId
-//access:  private
-const getWorkouts = async (req, res) => {};
 
-//desc:    Get workouts
+//desc:    Get workout
 //route:   GET /api/workouts/exercises/:workoutId
 //access:  private
 const getWorkout = async (req, res, next) => {
   try {
     const workout = await Workout.findByPk(req.params.workoutId);
     res.json(workout);
+  } catch (error) {
+    next(error);
+  }
+};
+
+//desc:    Get workouts of a user
+//route:   GET /api/workouts/all/:userId
+//access:  private
+const getWorkouts = async (req, res, next) => {
+  try {
+    const workouts = await Workout.findAll({
+      where: { userId: req.params.userId },
+    });
+    res.json(workouts);
   } catch (error) {
     next(error);
   }
