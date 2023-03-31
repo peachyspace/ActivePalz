@@ -57,8 +57,14 @@ const getExercisesOfAWorkout = async (req, res, next) => {
 //desc:    Update workouts
 //route:   PUT /api/workouts/:id
 //access:  private
-const updateWorkout = async (req, res) => {
-  res.status(200).json({ message: `Update workout ${req.params.id}` });
+const updateWorkout = async (req, res, next) => {
+  try {
+    const workout = await Workout.findByPk(req.params.id);
+    await workout.update(req.body);
+    res.json(workout);
+  } catch (error) {
+    next(error);
+  }
 };
 
 //desc:    Delete workouts

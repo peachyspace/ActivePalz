@@ -52,6 +52,10 @@ const updateExercise = async (req, res, next) => {
     next(error);
   }
 };
+//desc: delete an exercise
+//route: DELETE /api/exercise/:id
+//access: private
+
 module.exports = {
   setExercise,
   getExercise,
