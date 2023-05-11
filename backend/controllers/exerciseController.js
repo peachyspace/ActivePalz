@@ -40,7 +40,7 @@ const getExercisesOfAWorkout = async (req, res, next) => {
   }
 };
 
-//desc: update am exercise
+//desc: update an exercise
 //route: GET /api/exercise/:id
 //access: private
 const updateExercise = async (req, res, next) => {

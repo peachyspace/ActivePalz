@@ -43,12 +43,19 @@ const getWorkouts = async (req, res, next) => {
 //access: private
 const getExercisesOfAWorkout = async (req, res, next) => {
   try {
-    const workout = await Workout.findByPk(req.params.workoutId);
-    const relatedExercises = await workout.getExercises();
-    const completeWorkoutData = {};
-    completeWorkoutData.mainInfo = workout;
-    completeWorkoutData.allExercises = relatedExercises;
-    res.json(completeWorkoutData);
+    // const workout = await Workout.findByPk(req.params.workoutId);
+    // const relatedExercises = await workout.getExercises();
+    // const completeWorkoutData = {};
+    // completeWorkoutData.mainInfo = workout;
+    // completeWorkoutData.allExercises = relatedExercises;
+    // res.json(completeWorkoutData);
+
+    //eager loading
+    const workout = await Workout.findAll({
+      where: { id: req.params.workoutId },
+      include: Exercise,
+    });
+    res.json(workout);
   } catch (error) {
     next(error);
   }
