@@ -55,10 +55,19 @@ const updateExercise = async (req, res, next) => {
 //desc: delete an exercise
 //route: DELETE /api/exercise/:id
 //access: private
+const deleteExercise = async (req, res, next) => {
+  try {
+    await Exercise.destroy({ where: { id: req.params.id } });
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = {
   setExercise,
   getExercise,
   getExercisesOfAWorkout,
   updateExercise,
+  deleteExercise,
 };

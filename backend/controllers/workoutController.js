@@ -43,13 +43,6 @@ const getWorkouts = async (req, res, next) => {
 //access: private
 const getExercisesOfAWorkout = async (req, res, next) => {
   try {
-    // const workout = await Workout.findByPk(req.params.workoutId);
-    // const relatedExercises = await workout.getExercises();
-    // const completeWorkoutData = {};
-    // completeWorkoutData.mainInfo = workout;
-    // completeWorkoutData.allExercises = relatedExercises;
-    // res.json(completeWorkoutData);
-
     //eager loading
     const workout = await Workout.findAll({
       where: { id: req.params.workoutId },
@@ -74,11 +67,17 @@ const updateWorkout = async (req, res, next) => {
   }
 };
 
-//desc:    Delete workouts
-//route:   DELETE /api/workouts/:id
+//desc:    Deletes a workout and exercises related to it
+//route:   DELETE /api/workouts/:workoutsId
 //access:  private
-const deleteWorkout = async (req, res) => {
-  res.status(200).json({ message: `Delete workout ${req.params.id}` });
+const deleteWorkout = async (req, res, next) => {
+  try {
+    await Exercise.destroy({ where: { workout_id: req.params.workoutId } });
+    await Workout.destroy({ where: { id: req.params.workoutId } });
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = {

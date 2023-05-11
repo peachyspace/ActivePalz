@@ -13,6 +13,6 @@ router.get("/:workoutId", getWorkout);
 router.get("/exercises/:workoutId", getExercisesOfAWorkout);
 router.get("/all/:userId", getWorkouts);
 router.put("/:id", updateWorkout);
-router.delete("/:id", deleteWorkout);
+router.delete("/:workoutId", deleteWorkout);
 
 module.exports = router;
