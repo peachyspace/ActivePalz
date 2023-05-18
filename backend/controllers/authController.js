@@ -1,7 +1,7 @@
 const { User } = require("../database/models");
 
-//desc. Gets user
-//route: GET /auth/user/:email
+//desc. login user
+//route: POST /auth/user/:email
 //access: private
 const loginUser = async (req, res, next) => {
   try {

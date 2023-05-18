@@ -16,6 +16,12 @@ const User = db.define("users", {
   },
   password: {
     type: DataTypes.STRING,
+    /* the getter allows us to hide the password 
+    when serializing the users data to JSON
+   */
+    get() {
+      return () => this.getDataValues("password");
+    },
     allowNull: false,
   },
   sex: {
